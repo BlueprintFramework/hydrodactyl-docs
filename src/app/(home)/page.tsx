@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Hydrodactyl",
     description: "Hydrodactyl is an open, secure, and scalable servers platform. It's the world's best Pterodactyl panel with incredible performance and unmatched features.",
-    images: [{ url: "/og_hydrodactyl.png" }],
+    images: [{ url: "/hydrodactyl_firstlook.jpeg" }],
   },
 };
 
@@ -118,7 +118,7 @@ const Page = () => {
               width={1920}
               height={1080}
               alt="Hydrodactyl server management interface"
-              url="panel.pyro.host"
+              url="panel.hydrodactyl.dev"
             />
           </div>
         </div>
