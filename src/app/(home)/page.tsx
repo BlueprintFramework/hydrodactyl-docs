@@ -31,7 +31,7 @@ const features = [
   },
   {
     title: "Accessibility at the core",
-    description: "Pyro & Hydrodactyl are committed to making our software accessible to everyone. Hydrodactyl is no exception.",
+    description: "We are committed to making our software accessible to everyone.",
     icon: <UserGroupIcon className="w-5 h-5" />
   },
   {
