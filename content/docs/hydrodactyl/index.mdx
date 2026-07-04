@@ -9,12 +9,7 @@ description: The Pterodactyl-based game server panel that's faster, smaller, saf
 
 <Callout type="warn">
   Hydrodactyl is under development and pre-release. Some UI elements may appear
-  broken, and there might be some bugs.
-</Callout>
-
-<Callout type="info">
-  For Hydrodactyl-specific issues, join our Discord community at
-  [https://discord.gg/sK686yHdaK](https://discord.gg/sK686yHdaK) for support.
+  broken, and there might be some bugs. If you experience any issues, please share them with us through our [Discord community](https://discord.gg/sK686yHdaK).
 </Callout>
 
 Hydrodactyl is a modern, performance-focused game server management panel forked from Pterodactyl. It delivers smaller bundles, faster builds, and an accessible, reimagined interface.
@@ -32,11 +27,11 @@ Hydrodactyl is a modern, performance-focused game server management panel forked
 ![Dashboard Image](/fs.png)
 
 <Cards>
-  <Card title="Installation Guide" href="/docs/hydrodactyl/installation/fresh-installation">
+  <Card title="Install with Docker" href="/docs/hydrodactyl/installation/fresh-installation">
     Set up Hydrodactyl using Docker installation
   </Card>
   <Card
-    title="Installation Guides"
+    title="Install on other platforms"
     href="/docs/hydrodactyl/installation/community-install-guides"
   >
     Community guides for different platforms
@@ -58,9 +53,9 @@ Hydrodactyl is a modern, performance-focused game server management panel forked
   </Card>
 </Cards>
 
-## Quick Start
+## Quick Migrate
 
-For existing Pterodactyl Docker users, you can quickly switch to Hydrodactyl by updating your panel image:
+If you already run **Pterodactyl** in Docker, you can quickly switch to Hydrodactyl by updating your panel image:
 
 ```diff
 -image: ghcr.io/pterodactyl/panel:latest
@@ -68,7 +63,7 @@ For existing Pterodactyl Docker users, you can quickly switch to Hydrodactyl by 
 ```
 
 <Callout type="warn">
-  Windows is currently only supported for development purposes.
+  To install Hydrodactyl from scratch, [check out the installation guide](/docs/hydrodactyl/installation/fresh-installation). Windows is currently only supported for development purposes.
 </Callout>
 
 ## License
