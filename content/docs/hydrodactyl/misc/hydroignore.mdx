@@ -1,15 +1,15 @@
 ---
-title: PyroIgnore
-description: How the Pyro Ignore file works and what it does
+title: HydroIgnore
+description: How the Hydro Ignore file works and what it does
 ---
 
-# What is a .pyroignore file?
+# What is a .hydroignore file?
 
-The `.pyroignore` file is Hydrodactyl's version of the `.pteroignore` file. It allows you to specify files and directories that should be excluded from server backups. When you create a backup, Hydrodactyl reads this file and skips any files or directories that match the patterns defined within.
+The `.hydroignore` file is Hydrodactyl's version of the `.pteroignore` file. It allows you to specify files and directories that should be excluded from server backups. When you create a backup, Hydrodactyl reads this file and skips any files or directories that match the patterns defined within.
 
 ## How it works
 
-The `.pyroignore` file should be placed in the root directory of your server. Each line in the file represents a pattern to exclude from backups.
+The `.hydroignore` file should be placed in the root directory of your server. Each line in the file represents a pattern to exclude from backups.
 
 ## Pattern matching
 
@@ -91,6 +91,6 @@ node_modules/
 
 ## Limitations
 
-- The `.pyroignore` file only affects backups, not file operations in the live server
+- The `.hydroignore` file only affects backups, not file operations in the live server
 - Patterns are matched against the full file path from the server root
-- Some system files may always be excluded regardless of the `.pyroignore` file
+- Some system files may always be excluded regardless of the `.hydroignore` file
