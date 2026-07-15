@@ -17,12 +17,12 @@ description: How to update Hydrodactyl panel
 ### Update Dependencies
   Check your current versions by running
   ```bash
-    php -v
-    composer --version
+  php -v
+  composer --version
   ```
   they should match at least the minimum version supported by the release your installing.
 
-### Self Upgrade
+## Self Upgrade
   This is a feature in the works. It is planned for development and release at a soon point in the future.
 
 
@@ -38,6 +38,14 @@ description: How to update Hydrodactyl panel
 
   php artisan down
   ```
+### Set permissions
+
+  This is a temporary change to make the following setup easier. This will be changed back later!
+  `$(id -un):$(id -gn)` changes the ownership of the files to your current user. You can alter this if you know what you are doing.
+
+  ```bash
+  chown -R $(id -un):$(id -gn) /var/www/hydrodactyl/.
+  ```
 
 ### Download the Update
 
@@ -46,12 +54,14 @@ description: How to update Hydrodactyl panel
   save it in the current directory and will automatically unpack the archive into your current folder.
 
   ```bash
-    curl -L https://github.com/blueprintframework/hydrodactyl/releases/latest/download/panel.tar.gz | tar -xzv
+  curl -L https://github.com/blueprintframework/hydrodactyl/releases/latest/download/panel.tar.gz | tar -xzv
   ```
   Once all of the files are downloaded we need to set the correct permissions on the cache and storage
-  directories to avoid any webserver related errors.
+  directories to avoid any webserver related errors:
 
+  ```bash
   chmod -R 755 storage/* bootstrap/cache
+  ```
 
 ### Update Dependencies
 
@@ -59,26 +69,26 @@ description: How to update Hydrodactyl panel
   To do this, simply run the commands below and follow any prompts.
 
   ```bash
-    composer install --no-dev --optimize-autoloader
+  composer install --no-dev --optimize-autoloader
   ```
 
   You must also check for updated and new pnpm dependencies. This can be done by running
   ```bash
-    pnpm i
+  pnpm i
   ```
 
 ### Build New frontend assets
 
   ```bash
-    pnpm build
+  pnpm build
   ```
 
 ### Clear Compiled Template Cache
 
   You'll also want to clear the compiled template cache to ensure that new and modified templates show up correctly for users.
   ```bash
-    php artisan view:clear
-    php artisan config:clear
+  php artisan view:clear
+  php artisan config:clear
   ```
 
 ### Database Updates
@@ -87,7 +97,7 @@ description: How to update Hydrodactyl panel
   </Callout>
 
   ```bash
-    php artisan migrate --seed --force
+  php artisan migrate --seed --force
   ```
 
 ### Set Permissions
@@ -110,15 +120,12 @@ description: How to update Hydrodactyl panel
 ### Restarting Queue Workers
 
   ```bash
-    php artisan queue:restart
+  php artisan queue:restart
   ```
 
 ### Exit Maintenance Mode
 
   Now that everything has been updated you need to exit maintenance mode so that the Panel can resume accepting connections.
   ```bash
-    php artisan up
+  php artisan up
   ```
-
-
-
