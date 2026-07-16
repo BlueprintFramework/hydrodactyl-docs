@@ -1,0 +1,46 @@
+---
+title: Troubleshooting Common Issues
+description: If you encounter hydration mismatch errors in the browser console, try these steps
+---
+
+### Troubleshooting Common Issues
+
+#### Hydration Mismatch Errors
+
+If you encounter hydration mismatch errors in the browser console, try these steps:
+
+1. Clear your browser cache and cookies
+1. Rebuild the frontend assets:
+
+   ```bash
+   pnpm i --frozen-lockfile && pnpm run ship
+   ```
+
+1. Clear the application cache:
+
+   ```bash
+   php artisan view:clear
+   php artisan config:clear
+   ```
+
+<Callout type="info">
+  Hydration mismatches often occur when the server-rendered content doesn't
+  match the client-side rendered content. This can happen due to browser
+  extensions or cached assets.
+</Callout>
+
+#### Permission Issues
+
+If you encounter permission issues after updating:
+
+1. Verify the ownership of your files matches your web server user
+1. Ensure storage and cache directories are writable:
+
+   ```bash
+   chmod -R 755 storage/* bootstrap/cache/
+   chown -R www-data:www-data storage bootstrap/cache
+   ```
+
+<Callout type="warn">
+  Replace `www-data` with your web server user (nginx, apache) if different.
+</Callout>

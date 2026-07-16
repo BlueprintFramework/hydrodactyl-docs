@@ -1,14 +1,16 @@
 ---
-title: Updating Hydrodactyl
-description: How to update Hydrodactyl panel
+title: Updating
+description: Updating Hydrodactyl to the latest version (or any other version)
 ---
+
+import LatestVersion from '@/components/ui/LatestVersion';
 
 
 ## Panel Version Requirements
 
 |Panel Version|Supported Elytra Versions|Php Version
 |----|----|----|
-|4.2.0|1.0.0|8.2, 8.3|
+|<LatestVersion />|1.0.0|8.2, 8.3|
 
 
 
@@ -56,6 +58,16 @@ description: How to update Hydrodactyl panel
   ```bash
   curl -L https://github.com/blueprintframework/hydrodactyl/releases/latest/download/panel.tar.gz | tar -xzv
   ```
+  <Callout type='warn'>
+    If you want to install a version other than the latest, use the following instead:
+
+    ```bash
+    curl -L https://github.com/BlueprintFramework/hydrodactyl/releases/download/vn.n.n/panel.tar.gz | tar -xzv
+    ```
+
+    Where `n.n.n` is the version you want to install. You can find all versions on the [releases page](https://github.com/BlueprintFramework/hydrodactyl/releases).
+  </Callout>
+
   Once all of the files are downloaded we need to set the correct permissions on the cache and storage
   directories to avoid any webserver related errors:
 
@@ -74,13 +86,13 @@ description: How to update Hydrodactyl panel
 
   You must also check for updated and new pnpm dependencies. This can be done by running
   ```bash
-  pnpm i
+  pnpm i --frozen-lockfile
   ```
 
 ### Build New frontend assets
 
   ```bash
-  pnpm build
+  pnpm run ship
   ```
 
 ### Clear Compiled Template Cache
@@ -129,3 +141,4 @@ description: How to update Hydrodactyl panel
   ```bash
   php artisan up
   ```
+
