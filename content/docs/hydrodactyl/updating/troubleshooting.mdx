@@ -34,6 +34,18 @@ If you encounter hydration mismatch errors in the browser console, try these ste
 If you encounter permission issues after updating:
 
 1. Verify the ownership of your files matches your web server user
+
+   ```bash
+   # If using NGINX or Apache (not on CentOS)
+   chown -R www-data:www-data /var/www/hydrodactyl/*
+
+   # If using NGINX on CentOS
+   chown -R nginx:nginx /var/www/hydrodactyl/*
+
+   # If using Apache on CentOS
+   chown -R apache:apache /var/www/hydrodactyl/*
+   ```
+
 1. Ensure storage and cache directories are writable:
 
    ```bash
