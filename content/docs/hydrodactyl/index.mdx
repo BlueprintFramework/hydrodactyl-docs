@@ -9,35 +9,29 @@ description: The Pterodactyl-based game server panel that's faster, smaller, saf
 
 <Callout type="warn">
   Hydrodactyl is under development and pre-release. Some UI elements may appear
-  broken, and there might be some bugs.
+  broken, and there might be some bugs. If you experience any issues, please share them with us through our [Discord community](https://discord.gg/sK686yHdaK).
 </Callout>
 
-<Callout type="info">
-  For Hydrodactyl-specific issues, join our Discord community at
-  [https://discord.gg/sK686yHdaK](https://discord.gg/sK686yHdaK) for support.
-</Callout>
-
-Hydrodactyl is the Pterodactyl-based game server management panel that focuses on performance enhancements, a reimagined, accessible interface, and top-tier developer experience. Builds faster, compiles smaller: Hydrodactyl is the world's best Pterodactyl.
+Hydrodactyl is a modern, performance-focused game server management panel forked from Pterodactyl. It delivers smaller bundles, faster builds, and an accessible, reimagined interface.
 
 ![Dashboard Image](/hero.png)
 
 ## Changes from vanilla Pterodactyl
 
-- **Smaller bundle sizes**: Hydrodactyl is built using Vite, and significant design changes mean Hydrodactyl's initial download size is over 170 times smaller than leading Pterodactyl forks, including Pelican.
-- **Faster build times**: Hydrodactyl completes builds in milliseconds with the power of Turbo. Cold builds with zero cache finish in under 7 seconds.
-- **Faster loading times**: Hydrodactyl's load times are, on average, over 16 times faster than other closed-source Pterodactyl forks and Pelican. Smarter code splitting and chunking means that pages you visit in the panel only load necessary resources on demand. Better caching means that everything is simply snappy.
-- **More secure**: Hydrodactyl's modern architecture means most severe and easily exploitable CVEs simply do not exist. We have also implemented SRI and integrity checks for production builds.
-- **More accessible**: Hydrodactyl and Blueprint believe that gaming should be easily available for everyone. Hydrodactyl builds with the latest Web accessibility guidelines in mind. Hydrodactyl is entirely keyboard-navigable, even context menus, and screen-readers are easily compatible.
-- **More approachable**: Hydrodactyl's friendly, approachable interface means that anyone can confidently run a game server.
+- Smaller bundle size and faster build times using Vite and Turbo. Hydrodactyl's initial download size is over 100 times smaller than Pterodactyl. This has real upsides, even if you're not a developer.
+- Hydrodactyl loads faster! Better caching means that everything just feels snappy.
+- More secure. Hydrodactyl's modern achitecture means most easily exploitable CVEs simply do not exist. We've also set implemented SRI and integrity checks for production builds.
+- We believe in accessibility. Hydrodactyl builds with the latest Web accessibility guidelines in mind, and is entirely keyboard-navigable. Even context menus, and screen-readers are easily compatible.
+- Hydrodactyl's friendly, approachable interface means that anyone can confidently run a game server.
 
 ![Dashboard Image](/fs.png)
 
 <Cards>
-  <Card title="Installation Guide" href="/docs/hydrodactyl/installation/fresh-installation">
+  <Card title="Install with Docker" href="/docs/hydrodactyl/installation/fresh-installation">
     Set up Hydrodactyl using Docker installation
   </Card>
   <Card
-    title="Installation Guides"
+    title="Install on other platforms"
     href="/docs/hydrodactyl/installation/community-install-guides"
   >
     Community guides for different platforms
@@ -59,9 +53,9 @@ Hydrodactyl is the Pterodactyl-based game server management panel that focuses o
   </Card>
 </Cards>
 
-## Quick Start
+## Quick Migrate
 
-For existing Pterodactyl Docker users, you can quickly switch to Hydrodactyl by updating your panel image:
+If you already run **Pterodactyl** in Docker, you can quickly switch to Hydrodactyl by updating your panel image:
 
 ```diff
 -image: ghcr.io/pterodactyl/panel:latest
@@ -69,13 +63,20 @@ For existing Pterodactyl Docker users, you can quickly switch to Hydrodactyl by 
 ```
 
 <Callout type="warn">
-  Windows is currently only supported for development purposes.
+  To install Hydrodactyl from scratch, [check out the installation guide](/docs/hydrodactyl/installation/fresh-installation). Windows is currently only supported for development purposes.
 </Callout>
 
-## License
+## Copyright & Attribution
 
-Pterodactyl® Copyright 2015 - 2022 Dane Everitt and contributors.
+Hydrodactyl is built upon the work of previous open-source projects and their contributors:
 
-Hydrodactyl™ Copyright 2025 BlueprintFramework. Hydrodactyl. and contributors.
+- **Pterodactyl®**: Copyright © 2015–2022 Dane Everitt and contributors.
+- **Pyrodactyl™**: Copyright © 2023–2025 Pyro Inc. and contributors.
+- **Pyrodactyl™**: Copyright © 2025–2026 Pyrodactyl-oss and contributors.
+- **Hydrodactyl**: Copyright © 2026–present Naterfute, Blueprint Framework, and contributors.
 
-AGPL-3.0-or-later
+All original copyright notices, license notices, and attributions must remain intact when redistributing this software.
+
+Unless explicitly stated otherwise, all source code within the BlueprintFramework/hydrodactyl GitHub repository is licensed under the Apache License 2.0.
+
+Hydrodactyl's website and documentation, hosted on the BlueprintFramework/hydrodactyl-docs GitHub repository, are licensed under the AGPL-3.0 license.

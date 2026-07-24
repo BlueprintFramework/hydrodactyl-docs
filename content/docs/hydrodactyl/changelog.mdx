@@ -3,35 +3,36 @@ title: Changelog
 description: Hydrodactyl Changelog
 ---
 
-
 This file is a running track of new features and fixes to each version of the panel released starting with `v4.0.0`.
+
+`v6.0.0` marks the release Hydrodactyl rebranded from Pyrodactyl. These releases may link to the old GitHub organization and repository. [Read more here.](https://blueprint.zip/blog/introducing-hydrodactyl)
 
 This project follows [Semantic Versioning](http://semver.org) guidelines.
 
-## V5.0.3 - 2/20/26
+## v5.0.3 - 2/20/26
 ### Fixed
-- Unable to edit startup command when using `wings` Daemon [#50](https://github.com/blueprintframework/hydrodactyl/pull/50)
+- Unable to edit startup command when using `wings` Daemon [#50](https://github.com/pyrodactyl-oss/pyrodactyl/pull/50)
 
-## V5.0.2 - 2/20/26
+## v5.0.2 - 2/20/26
 ### Fixed
 - Restoring a backup on Wings was impossible due to Frontend and Backend error
 
 
-## V5.0.1 - 02/16/26
+## v5.0.1 - 02/16/26
 ### Fixed
 Creating nodes via the api not expecting new fields for `daemonDisk` and `daemonType`
 
 ### Changed
-* better readme by @imeesa in [#46](https://github.com/blueprintframework/hydrodactyl/pull/46)
-* Update DB_USERNAME from 'pterodactyl' to 'hydrodactyl' by @ThatBritishOne in [#47](https://github.com/blueprintframework/hydrodactyl/pull/47)
-* .github/workflows: Migrate workflows to Blacksmith runners by @blacksmith-sh[bot] in [#48](https://github.com/blueprintframework/hydrodactyl/pull/48)
-* fixed gitignore to not ignore .env.example by @Tyrthurey in [#49](https://github.com/blueprintframework/hydrodactyl/pull/49)
+* better readme by @imeesa in [#46](https://github.com/pyrodactyl-oss/pyrodactyl/pull/46)
+* Update DB_USERNAME from 'pterodactyl' to 'pyrodactyl' by @ThatBritishOne in [#47](https://github.com/pyrodactyl-oss/pyrodactyl/pull/47)
+* .github/workflows: Migrate workflows to Blacksmith runners by @blacksmith-sh[bot] in [#48](https://github.com/pyrodactyl-oss/pyrodactyl/pull/48)
+* fixed gitignore to not ignore .env.example by @Tyrthurey in [#49](https://github.com/pyrodactyl-oss/pyrodactyl/pull/49)
 
 ### New Contributors
-* @ThatBritishOne made their first contribution in [#47](https://github.com/blueprintframework/hydrodactyl/pull/47)
+* @ThatBritishOne made their first contribution in [#47](https://github.com/pyrodactyl-oss/pyrodactyl/pull/47)
 
 
-## V5.0.0 - 01/25/26
+## v5.0.0 - 01/25/26
 Thank you for using Hydrodactyl! This release brings us closer to full stability, combining Pterodactyl's Stability and Support with Hydrodactyl's modern more attractive Interface.
 
 <Callout type="warn">
@@ -62,7 +63,7 @@ Backups are now per-node, allowing mixed local/S3 configurations across servers.
 - Allocation deletion when no limit set (commit b695ef29)  
 - Non-themed popup on port allocation deletion (#42)
 
-**Full Changelog**: https://github.com/blueprintframework/hydrodactyl/compare/v4.5.2...v5.0.0
+**Full Changelog**: https://github.com/pyrodactyl-oss/pyrodactyl/compare/v4.5.2...v5.0.0
 
 ## v4.5.2 - 12/23/25
 
@@ -73,13 +74,13 @@ Backups are now per-node, allowing mixed local/S3 configurations across servers.
 ## v4.5.1 - 12/21/25
 
 ### Pull Requests
-* File upload dialog fix by @en0tuk in https://github.com/blueprintframework/hydrodactyl/pull/6
-* chore(deps): bump turbo from 2.5.5 to 2.6.1 by @dependabot[bot] in https://github.com/blueprintframework/hydrodactyl/pull/5
-* chore(deps): bump @radix-ui/react-dropdown-menu from 2.1.15 to 2.1.16 by @dependabot[bot] in https://github.com/blueprintframework/hydrodactyl/pull/4
-* fix confusing behavior with nginx config by @imeesa in https://github.com/blueprintframework/hydrodactyl/pull/8
-* feat: added Vintage Story support with new subdomain feature and egg  by @NobleSkye in https://github.com/blueprintframework/hydrodactyl/pull/11
-* Update java to 25 by @NobleSkye in https://github.com/blueprintframework/hydrodactyl/pull/22
-* fix: update configuration directory path (shows elytra path  by @NobleSkye in https://github.com/blueprintframework/hydrodactyl/pull/20
+* File upload dialog fix by @en0tuk in https://github.com/pyrodactyl-oss/pyrodactyl/pull/6
+* chore(deps): bump turbo from 2.5.5 to 2.6.1 by @dependabot[bot] in https://github.com/pyrodactyl-oss/pyrodactyl/pull/5
+* chore(deps): bump @radix-ui/react-dropdown-menu from 2.1.15 to 2.1.16 by @dependabot[bot] in https://github.com/pyrodactyl-oss/pyrodactyl/pull/4
+* fix confusing behavior with nginx config by @imeesa in https://github.com/pyrodactyl-oss/pyrodactyl/pull/8
+* feat: added Vintage Story support with new subdomain feature and egg  by @NobleSkye in https://github.com/pyrodactyl-oss/pyrodactyl/pull/11
+* Update java to 25 by @NobleSkye in https://github.com/pyrodactyl-oss/pyrodactyl/pull/22
+* fix: update configuration directory path (shows elytra path  by @NobleSkye in https://github.com/pyrodactyl-oss/pyrodactyl/pull/20
 
 
 ### Changed
@@ -99,56 +100,56 @@ Backups are now per-node, allowing mixed local/S3 configurations across servers.
 - Fix file Upload Dialog: #6
 
 ### New Contributors
-* @en0tuk made their first contribution in https://github.com/blueprintframework/hydrodactyl/pull/6
-* @dependabot[bot] made their first contribution in https://github.com/blueprintframework/hydrodactyl/pull/5
-* @imeesa made their first contribution in https://github.com/blueprintframework/hydrodactyl/pull/8
-* @NobleSkye made their first contribution in https://github.com/blueprintframework/hydrodactyl/pull/11
+* @en0tuk made their first contribution in https://github.com/pyrodactyl-oss/pyrodactyl/pull/6
+* @dependabot[bot] made their first contribution in https://github.com/pyrodactyl-oss/pyrodactyl/pull/5
+* @imeesa made their first contribution in https://github.com/pyrodactyl-oss/pyrodactyl/pull/8
+* @NobleSkye made their first contribution in https://github.com/pyrodactyl-oss/pyrodactyl/pull/11
 
 
-**Full Changelog**: https://github.com/blueprintframework/hydrodactyl/commits/v4.5.1
+**Full Changelog**: https://github.com/pyrodactyl-oss/pyrodactyl/commits/v4.5.1
 
 
 ## v4.5.0 - 10/28/25
 
 ### Changed
-* fix readme mistakes by @imeesa in https://github.com/pyrohost/hydrodactyl/pull/342
-* feat: bypass reinstall delay by holding shift by @imeesa in https://github.com/pyrohost/hydrodactyl/pull/346
-* [DRAFT] Client panel improvements by @imeesa in https://github.com/pyrohost/hydrodactyl/pull/350
-* fix: file manager (why did users only see the bug post-pr) by @imeesa in https://github.com/pyrohost/hydrodactyl/pull/351
-* fix: login doesn't work on first launch by @imeesa in https://github.com/pyrohost/hydrodactyl/pull/355
-* readd server filters on the main page and mark zone id as requ... by @imeesa in https://github.com/pyrohost/hydrodactyl/pull/358
-* feature: deduplicated backups using elytra + backup storage quota + nullable server limits for unlimited by @ChecksumDev in https://github.com/pyrohost/hydrodactyl/pull/359
-* fix: login fails on first launch again? seems to be a different log that wasn't used before. by @imeesa in https://github.com/pyrohost/hydrodactyl/pull/360
-* fix: async backups. awesoooome by @naterfute in https://github.com/pyrohost/hydrodactyl/pull/370
-* fix: add file cap so big directories don't just error by @imeesa in https://github.com/pyrohost/hydrodactyl/pull/374
-* fix: enhance placeholder matching for properties parser in EggConfigu… by @JellisyWoes in https://github.com/pyrohost/hydrodactyl/pull/376
-* feat: import eggs from URLs or URIs whatever by @imeesa in https://github.com/pyrohost/hydrodactyl/pull/361
-* Add Hetzner as DNS provider by @zHappySnake in https://github.com/pyrohost/hydrodactyl/pull/383
-* cap the desc to be at max of 100 chars by @NobleSkye in https://github.com/pyrohost/hydrodactyl/pull/386
-* Docker & native checks in bugs & pyroignore file instead of pteroignore by @NobleSkye in https://github.com/pyrohost/hydrodactyl/pull/382
-* Revise installation type labels in bug report template by @NobleSkye in https://github.com/pyrohost/hydrodactyl/pull/388
-* Fix comment typo for DB_PASSWORD in docker-compose by @terrencetingleberry in https://github.com/pyrohost/hydrodactyl/pull/397
+* fix readme mistakes by @imeesa in https://github.com/pyrohost/pyrodactyl/pull/342
+* feat: bypass reinstall delay by holding shift by @imeesa in https://github.com/pyrohost/pyrodactyl/pull/346
+* [DRAFT] Client panel improvements by @imeesa in https://github.com/pyrohost/pyrodactyl/pull/350
+* fix: file manager (why did users only see the bug post-pr) by @imeesa in https://github.com/pyrohost/pyrodactyl/pull/351
+* fix: login doesn't work on first launch by @imeesa in https://github.com/pyrohost/pyrodactyl/pull/355
+* readd server filters on the main page and mark zone id as requ... by @imeesa in https://github.com/pyrohost/pyrodactyl/pull/358
+* feature: deduplicated backups using elytra + backup storage quota + nullable server limits for unlimited by @ChecksumDev in https://github.com/pyrohost/pyrodactyl/pull/359
+* fix: login fails on first launch again? seems to be a different log that wasn't used before. by @imeesa in https://github.com/pyrohost/pyrodactyl/pull/360
+* fix: async backups. awesoooome by @naterfute in https://github.com/pyrohost/pyrodactyl/pull/370
+* fix: add file cap so big directories don't just error by @imeesa in https://github.com/pyrohost/pyrodactyl/pull/374
+* fix: enhance placeholder matching for properties parser in EggConfigu… by @JellisyWoes in https://github.com/pyrohost/pyrodactyl/pull/376
+* feat: import eggs from URLs or URIs whatever by @imeesa in https://github.com/pyrohost/pyrodactyl/pull/361
+* Add Hetzner as DNS provider by @zHappySnake in https://github.com/pyrohost/pyrodactyl/pull/383
+* cap the desc to be at max of 100 chars by @NobleSkye in https://github.com/pyrohost/pyrodactyl/pull/386
+* Docker & native checks in bugs & pyroignore file instead of pteroignore by @NobleSkye in https://github.com/pyrohost/pyrodactyl/pull/382
+* Revise installation type labels in bug report template by @NobleSkye in https://github.com/pyrohost/pyrodactyl/pull/388
+* Fix comment typo for DB_PASSWORD in docker-compose by @terrencetingleberry in https://github.com/pyrohost/pyrodactyl/pull/397
 
 ### New Contributors
-* @JellisyWoes made their first contribution in https://github.com/pyrohost/hydrodactyl/pull/376
-* @zHappySnake made their first contribution in https://github.com/pyrohost/hydrodactyl/pull/383
-* @NobleSkye made their first contribution in https://github.com/pyrohost/hydrodactyl/pull/386
-* @terrencetingleberry made their first contribution in https://github.com/pyrohost/hydrodactyl/pull/397
+* @JellisyWoes made their first contribution in https://github.com/pyrohost/pyrodactyl/pull/376
+* @zHappySnake made their first contribution in https://github.com/pyrohost/pyrodactyl/pull/383
+* @NobleSkye made their first contribution in https://github.com/pyrohost/pyrodactyl/pull/386
+* @terrencetingleberry made their first contribution in https://github.com/pyrohost/pyrodactyl/pull/397
 
-**Full Changelog**: https://github.com/pyrohost/hydrodactyl/compare/v4.4.0...v4.5.0
+**Full Changelog**: https://github.com/pyrohost/pyrodactyl/compare/v4.4.0...v4.5.0
 
 
 ## V4.4.0 - 10/24/25
 
 ### Added
-- DNS Support for subdomains such as servers.hydrodactyl.dev [#396](https://github.com/pyrohost/hydrodactyl/issues/396)
+- DNS Support for subdomains such as servers.hydrodactyl.dev [#396](https://github.com/pyrohost/pyrodactyl/issues/396)
 - Allow using Ip Alias for domain allocations
 
 ### Changed
-- Allow users to exist without last name [#272](https://github.com/pyrohost/hydrodactyl/issues/272)
+- Allow users to exist without last name [#272](https://github.com/pyrohost/pyrodactyl/issues/272)
 
 
-**Full Changelog**: https://github.com/pyrohost/hydrodactyl/compare/v4.3.0...v4.4.0
+**Full Changelog**: https://github.com/pyrohost/pyrodactyl/compare/v4.3.0...v4.4.0
 
 
 ## V4.3.0 - 10/24/25
@@ -179,6 +180,6 @@ fresh starting point from dns_manager addon
 
 ### Fixed
   - Mobile Sidebar turned into navbar to make it work better and be more navigatable
-  - feat: bypass reinstall delay by holding shift by @imeesa in https://github.com/pyrohost/hydrodactyl/pull/346
-  - Client panel improvements by @imeesa in https://github.com/pyrohost/hydrodactyl/pull/350
+  - feat: bypass reinstall delay by holding shift by @imeesa in https://github.com/pyrohost/pyrodactyl/pull/346
+  - Client panel improvements by @imeesa in https://github.com/pyrohost/pyrodactyl/pull/350
   - Backups showing more text then can display (max 100chars)
