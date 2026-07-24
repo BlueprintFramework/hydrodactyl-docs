@@ -53,11 +53,11 @@ const features = [
     ),
     icon: <CubeIcon className="w-5 h-5" />
   },
-  {
-    title: "Open source",
-    description: "Hydrodactyl is the first (and only) panel that a company has made its source publicly available.",
-    icon: <CodeBracketIcon className="w-5 h-5" />
-  },
+ // {
+   // title: "Open source",
+   // description: "Hydrodactyl is the first (and only) panel that a company has made its source publicly available.",
+   // icon: <CodeBracketIcon className="w-5 h-5" />
+//  },
 ];
 
 const buildTimes = [
