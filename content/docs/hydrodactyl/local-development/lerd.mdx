@@ -20,11 +20,15 @@ description: Setup a local development environment using Lerd
 
 ## Initial setup
 
+   <Callout type="warn">
+   Note: Running a development environment on the same host as a production environment is not supported and will result in an error when connecting to port 80.
+   </Callout>
+
 1. Clone the Hydrodactyl panel repository  
    `git clone https://github.com/BlueprintFramework/hydrodactyl.git`
 
 1. Cd into the Hydrodactyl directory  
-   `cd Hydrodactyl`
+   `cd hydrodactyl`
 
 1. Run the dev env  
    `pnpm dev:setup`

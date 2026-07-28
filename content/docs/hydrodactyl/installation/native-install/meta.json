@@ -1,4 +1,4 @@
 {
   "title": "Native Installation",
-  "pages": ["webserver", "configurations", "updating"]
+  "pages": ["native", "webserver", "configurations"]
 }
