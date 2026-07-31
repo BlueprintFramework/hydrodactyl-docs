@@ -444,7 +444,7 @@ export default function Changelog() {
             </div>
           ) : null}
 
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center"> //da button
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
             {hasMore ? (
               <button
                 type="button"
