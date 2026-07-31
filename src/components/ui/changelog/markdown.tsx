@@ -185,15 +185,14 @@ export function renderBlocks(blocks: Array<Block & { id?: string }>): ReactNode 
 
     if (block.type === 'heading') {
       const level = Math.min(Math.max(block.level, 2), 6);
-      const Tag = `h${level}` as keyof JSX.IntrinsicElements;
+      const Tag = `h${level}`;
       return (
-        <Tag
-          key={key}
-          id={block.id}
+        <h2
+          key={block.id}
           className="mt-4 scroll-mt-24 text-sm font-semibold uppercase tracking-wide text-fd-muted-foreground first:mt-0"
         >
           {renderInline(block.text, key)}
-        </Tag>
+        </h2>
       );
     }
 

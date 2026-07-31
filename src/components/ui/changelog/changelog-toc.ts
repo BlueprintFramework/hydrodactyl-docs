@@ -1,5 +1,5 @@
 import { parseBlocks, type Block } from '@/components/ui/changelog/markdown';
-import type { ReleaseSummary } from './github-releases';
+import type { ReleaseSummary } from '../../../lib/github-releases';
 
 export type TocEntry = { title: string; url: string; depth: number };
 export type AnnotatedRelease = {
