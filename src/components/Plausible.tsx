@@ -7,6 +7,7 @@ export default function Plausible() {
     import('@plausible-analytics/tracker').then(({ init }) => {
       init({
         domain: 'hydrodactyl.dev',
+        endpoint: 'https://plausible.prpl.wtf/api/event',
       });
     });
   }, []);
