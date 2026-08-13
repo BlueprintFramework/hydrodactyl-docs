@@ -11,91 +11,7 @@ When changing Hydrodactyl Panel's backup storage method, users may still downloa
 
 
 ### Local Backups
-By default, Hydrodactyl Panel uses local storage via Elytra for backups. That said, this method of backup storage can be explicitly set with the following configuration in your environment(.env):
-```dotenv
-APP_BACKUP_DRIVER=Elytra
-```
-
-Do note that, when using local storage via Elytra, the destination for backups is set in Elytra' config.yml with the following setting key:
-```yaml
-system:
-  backup_directory: /path/to/backup/storage
-```
-
-## Local Rustic Backups
-<Callout type="warn">
-Backups using Rustic are encrypted. So backups will only be accessible through the panel, or if you get the encryption key.
-</Callout>
-To use local s3 backups. it's just as simple as using the base elytra backup system.
-```dotenv
-APP_BACKUP_DRIVER=rustic_local
-```
-additional settings are managed by Elytra on each nodes config.
-
-### S3 Backups with Rustic
-<Callout type="warn">
-Backups using Rustic are encrypted. So backups will only be accessible through the panel, or if you get the encryption key.
-</Callout>
-Why rustic?  
-Using the Rustic system allows backups to be dedeuplicated,
-this means that you don't backup the same piece of data twice, leading to massive ingress/outgress and storage
-saving costs.
-```dotenv
-  # Sets your panel to use rustic_s3 for backups
-  APP_BACKUP_DRIVER=rustic_s3
-
-  # Info to actually use s3
-  RUSTIC_S3_ENDPOINT=[Your s3 endpoint]
-  RUSTIC_S3_REGION=us-east-1
-  RUSTIC_S3_BUCKET=hydrodactyl
-  RUSTIC_S3_PREFIX=rustic-repos/
-  RUSTIC_S3_ACCESS_KEY_ID=[Your s3 access key]
-  RUSTIC_S3_SECRET_ACCESS_KEY=[Your s3 secret access key]
-  # If your not sure what this means, don't worry. Neither do I.
-  RUSTIC_S3_USE_COLD_STORAGE=false
-
-```
-For some configurations, you might have to change your S3 URL from bucket.domain.com to domain.com/bucket. To accomplish this, add AWS_USE_PATH_STYLE_ENDPOINT=true to your .env file
-
-
-### Storage Class
-Should you need to specify a storage class, use the AWS_BACKUPS_STORAGE_CLASS environment variable. Default option is STANDARD (S3 Standard).
-
-The following .env snippet sets the class to STANDARD_IA (this is an example).
-```dotenv
-# STANDARD_IA is an example.
-AWS_BACKUPS_STORAGE_CLASS=STANDARD_IA
-```
-
-
-### Multipart Uploads(Deprecated)
-Due to changes in the ecosystem from Hydrodactyl to Hydrodactyl, Multipart uploads for buckets no longer
-happen on the panel side. Instead, it's fully managed by your nodes.
-
-## Reverse Proxy
-When running Hydrodactyl behind a reverse proxy, such as Cloudflare's Flexible SSL
-
-(opens new window) or Nginx/Apache/Caddy, etc., you will need to make a quick modification to the Panel to ensure things continue to work as expected. By default, when using these reverse proxies, your Panel will not correctly handle requests. You'll most likely be unable to login or see security warnings in your browser console as it attempts to load insecure assets. This is because the internal logic the Panel uses to determine how links should be generated thinks it is running over HTTP and not over HTTPS.
-
-You will need to edit the .env file in the Panel's root directory to contain TRUSTED_PROXIES=* at minimum. We highly suggest providing a specific IP address (or comma-separated list of IPs) rather than allowing *. For example, if your proxy is running on the same machine as the server, the chances are that something like TRUSTED_PROXIES=127.0.0.1 will work for you.
-
-
-### Nginx
-For Hydrodactyl to properly respond to an NGINX reverse proxy, the NGINX location config must contain the following lines:
-```nginx
-  proxy_set_header X-Real-IP $remote_addr;
-  proxy_set_header Host $host;
-  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-  proxy_set_header X-Forwarded-Proto $scheme;
-  proxy_redirect off;
-  proxy_buffering off;
-  proxy_request_buffering off;
-```
-### Cloudflare
-If you're using Cloudflare's Flexible SSL you should set TRUSTED_PROXIES to contain [their IP addresses](https://www.cloudflare.com/ips/). Below is an example of how to set this.
-```dotenv
-TRUSTED_PROXIES=173.245.48.0/20,103.21.244.0/22,103.22.200.0/22,103.31.4.0/22,141.101.64.0/18,108.162.192.0/18,190.93.240.0/20,188.114.96.0/20,197.234.240.0/22,198.41.128.0/17,162.158.0.0/15,104.16.0.0/13,104.24.0.0/14,172.64.0.0/13,131.0.72.0/22
-```
+By default, Hydrodactyl Panel uses local storage for backups. This is a per-server configured value that you will have to edit when setting up the node.
 
 
 ## Captcha
@@ -108,7 +24,7 @@ we support 3 major ones(for now).
 
 To configure these, it is no longer done through environment variables. Instead, visit your admin panel
 at  
-https://your-pyro.com/admin/settings/captcha  
+https://your-panel.dev/admin/settings/captcha  
 The setup is very self explanetory and as such, no details will be provided here. If you need help,
 visit the discord.
 
@@ -121,7 +37,6 @@ USE_CAPTCHA=false
 ```
 
 ### Additional
-
 
 ## 2FA
 Two Factor Authentication is paramount in securing your application from bad actors.

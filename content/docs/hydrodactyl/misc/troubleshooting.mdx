@@ -7,10 +7,6 @@ description: Common issues and their solutions for Hydrodactyl
 
 This guide covers common issues users encounter with Hydrodactyl and their solutions.
 
-<Callout type="error">
-  This document still references Elytra. Please note that it is no longer supported.
-</Callout>
-
 ## Installation Issues
 
 ### Docker Container Won't Start
@@ -124,9 +120,9 @@ This guide covers common issues users encounter with Hydrodactyl and their solut
 **Problem**: Created servers don't appear in the panel.
 
 **Solutions**:
-1. Check Elytra connection:
+1. Check Wings connection:
    ```bash
-   docker exec -it hydrodactyl-elytra elytra debug
+   docker exec -it hydrodactyl-wings wings debug
    ```
 
 2. Verify daemon configuration:
@@ -134,9 +130,9 @@ This guide covers common issues users encounter with Hydrodactyl and their solut
    - Ensure communication URL is accessible
    - Verify SSL certificate
 
-3. Restart Elytra daemon:
+3. Restart Wings daemon:
    ```bash
-   docker-compose restart elytra
+   docker-compose restart wings
    ```
 
 ## Server Issues
@@ -155,7 +151,7 @@ This guide covers common issues users encounter with Hydrodactyl and their solut
 
 3. Check Docker container status:
    ```bash
-   docker exec -it hydrodactyl-elytra docker ps -a
+   docker exec -it hydrodactyl-wings docker ps -a
    ```
 
 4. Inspect server container logs:
@@ -186,7 +182,7 @@ This guide covers common issues users encounter with Hydrodactyl and their solut
    - Open browser developer tools
    - Check Network tab for WebSocket errors
 
-2. Verify Elytra daemon is running
+2. Verify Wings daemon is running
 3. Check firewall settings:
    ```bash
    sudo ufw status
@@ -209,7 +205,7 @@ This guide covers common issues users encounter with Hydrodactyl and their solut
 3. Check available disk space
 4. Review backup logs:
    ```bash
-   docker exec -it hydrodactyl-elytra tail -f /var/log/elytra/backup.log
+   docker exec -it hydrodactyl-wings tail -f /var/log/pterodactyl/backup.log
    ```
 
 ### Large Backup Times
@@ -357,9 +353,9 @@ APP_LOG_LEVEL=debug
    docker exec -it hydrodactyl-panel tail -f storage/logs/laravel.log
    ```
 
-2. Monitor Elytra logs:
+2. Monitor Wings logs:
    ```bash
-   docker exec -it hydrodactyl-elytra tail -f /var/log/elytra/elytra.log
+   docker exec -it hydrodactyl-wings tail -f /var/log/pterodactyl/wings.log
    ```
 
 3. Use browser developer tools:
@@ -389,6 +385,6 @@ When seeking help, please include:
 ### Log Locations
 
 - Panel logs: `storage/logs/laravel.log`
-- Elytra logs: `/var/log/elytra/elytra.log`
+- Wings logs: `/var/log/Pterodactyl/wings.log`
 - Nginx logs: `/var/log/nginx/error.log`
 - PHP logs: `/var/log/php8.2-fpm.log`
