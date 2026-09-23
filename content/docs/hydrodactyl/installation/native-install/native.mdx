@@ -132,10 +132,7 @@ Hydrodactyl's core environment is easily configured using a few different CLI co
   php artisan migrate --seed --force
   ```
 ### Add The First User
-You'll then need to create an administrative user so that you can log into the panel. To do so, run the command below. At this time passwords must meet the following requirements: 8 characters, mixed case, at least one number.
-  ```bash
-  php artisan p:user:make
-  ```
+You'll then log into the panel via a web browser to create the initial administrator account. With no accounts on the system yet, the panel's builtin initial admin creation suite will guide you through the process on your first visit. At this time passwords must meet the following requirements: 8 characters, mixed case, at least one number.
 
 ### Set Permissions
   ```bash
