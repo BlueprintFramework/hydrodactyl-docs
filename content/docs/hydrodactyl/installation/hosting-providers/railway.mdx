@@ -1,0 +1,104 @@
+---
+title: Installing with Railway
+description: Deploy Hydrodactyl on Railway using the community template
+---
+
+This guide walks you through deploying Hydrodactyl on [Railway](https://railway.com/) using the community-maintained one-click template. The template provisions the panel together with MariaDB and Redis.
+
+<Callout type="warn">
+  This template is **unofficial and community-maintained**. It is not built or
+  supported by the Hydrodactyl team, and issues with the template itself should
+  be raised with its author rather than the Hydrodactyl maintainers.
+</Callout>
+
+<Callout type="info">
+  Need help with Hydrodactyl itself? Join our [Hydrodactyl
+  Discord](https://discord.gg/sK686yHdaK) or open a discussion on
+  [GitHub](https://github.com/blueprintframework/hydrodactyl/discussions).
+</Callout>
+
+## Prerequisites
+
+- A [Railway](https://railway.com/) account
+- A domain name (recommended) — Railway can also issue you a `*.up.railway.app` domain
+- A separate machine or provider for [Pterodactyl Wings](https://pterodactyl.io/wings/1.0/installing.html) if you want to run game servers. Railway only hosts the panel, its database, and its cache.
+
+## What the template creates
+
+Deploying the [Hydrodactyl template](https://railway.com/deploy/hydrodactyl) creates three services in a new Railway project:
+
+| Service    | Image                                     | Purpose                        |
+| ---------- | ----------------------------------------- | ------------------------------ |
+| Hydrodactyl | `ghcr.io/blueprintframework/hydrodactyl` | The panel (Nginx + PHP)        |
+| MariaDB    | `mariadb:12`                              | Panel database                 |
+| Redis      | `redis:8.2`                               | Cache, sessions, and queues    |
+
+Railway automatically wires the panel to MariaDB and Redis over its private network and generates the required secrets (`APP_KEY`, `HASHIDS_SALT`, database and Redis passwords) for you.
+
+## Panel installation
+
+1. **Deploy the template**
+
+   Open the [Hydrodactyl template](https://railway.com/deploy/hydrodactyl), sign in to Railway if prompted, and click **Deploy Now**. Choose the workspace and project you want it in, then confirm.
+
+2. **Wait for the services to come up**
+
+   Railway builds all three services. The panel reports healthy once its `/up` endpoint responds and the database migrations have run. You can follow progress in the **Deployments** tab of the Hydrodactyl service.
+
+3. **Expose the panel**
+
+   Open the Hydrodactyl service, go to **Settings → Networking**, and click **Generate Domain**. To use your own domain instead, add it under **Custom Domain** and follow Railway's DNS instructions.
+
+4. **Point `APP_URL` at your domain**
+
+   The template derives `APP_URL` from the Railway-provided domain. If you attached a custom domain, update the `APP_URL` variable on the Hydrodactyl service to `https://your-domain` and redeploy. The panel uses this value for links and for the queue/cron jobs.
+
+5. **Create your administrator account**
+
+   Visit the panel at the configured URL. With no accounts on the system yet, the panel's built-in initial admin creation suite will guide you through creating the first administrator account.
+
+<Callout type="note">
+  Railway terminates TLS at its edge, so leave `LE_EMAIL` unset on the
+  Hydrodactyl service — HTTPS is handled for you.
+</Callout>
+
+## Post-installation configuration
+
+1. **Panel setup**:
+   - Access your panel at the configured domain
+   - Log in with your admin account
+   - Navigate to **Admin → Locations** and create a new location
+   - Navigate to **Nodes** and add your Wings instance
+
+2. **Email configuration** (Admin → Settings):
+   - Set `MAIL_*` variables on the Hydrodactyl service and redeploy
+   - Recommended providers:
+     - Resend
+     - Mailgun
+     - AWS SES
+
+## Maintenance
+
+1. **Updating Hydrodactyl**:
+   - The template is pinned to a specific image tag. To update, change the image
+     on the Hydrodactyl service (e.g. `ghcr.io/blueprintframework/hydrodactyl:v6.4.1`)
+     and redeploy.
+
+## Troubleshooting
+
+Common issues and solutions:
+
+- **Build or deploy failures**:
+  - Check the deployment logs for the failing service
+  - Verify the MariaDB and Redis services are running before the panel
+- **Panel loads but assets or links use the wrong URL**:
+  - Make sure `APP_URL` matches the public domain exactly, including `https://`
+- **"Waiting for database connection" in the logs**:
+  - MariaDB is still starting up; the panel retries automatically
+
+## Additional resources
+
+- [Railway Documentation](https://docs.railway.com/)
+- [Hydrodactyl Railway template](https://railway.com/deploy/hydrodactyl)
+- [Hydrodactyl GitHub](https://github.com/blueprintframework/hydrodactyl)
+- [Pterodactyl Wings Setup](https://pterodactyl.io/wings/1.0/installing.html)
