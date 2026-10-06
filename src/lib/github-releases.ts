@@ -1,6 +1,8 @@
 const OWNER = 'blueprintframework';
 const REPO = 'hydrodactyl';
 
+const BUILD_TOKEN = `${Date.now()}-${process.pid}`;
+
 export type ReleaseSummary = {
   tagName: string;
   publishedAt: string | null;
@@ -31,6 +33,30 @@ function mapReleases(data: Array<Record<string, any>>): ReleaseSummary[] {
     }));
 }
 
+async function githubApi<T>(
+  owner: string,
+  repo: string,
+  path: string
+): Promise<T> {
+  const res = await fetch(
+    `https://api.github.com/repos/${owner}/${repo}${path}`,
+    {
+      headers: {
+        Accept: 'application/vnd.github+json',
+        ...(process.env.GITHUB_TOKEN && {
+          Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+        }),
+      },
+    }
+  );
+
+  if (!res.ok) {
+    throw new Error(`GitHub API error: ${res.status}`);
+  }
+
+  return res.json() as Promise<T>;
+}
+
 // Fetches every release page-by-page until GitHub returns a short page
 // (i.e. we've hit the end). This only ever runs during `next build`,
 // on your CI runner — never in a visitor's browser.
@@ -40,23 +66,12 @@ export async function fetchAllReleases(): Promise<ReleaseSummary[]> {
   const perPage = 100; // max GitHub allows per page, minimizes request count
 
   while (true) {
-    const res = await fetch(
-      `https://api.github.com/repos/${OWNER}/${REPO}/releases?per_page=${perPage}&page=${page}`,
-      {
-        headers: {
-          Accept: 'application/vnd.github+json',
-          ...(process.env.GITHUB_TOKEN && {
-            Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
-          }),
-        },
-      }
+    const data = await githubApi<Array<Record<string, any>>>(
+      OWNER,
+      REPO,
+      `/releases?per_page=${perPage}&page=${page}&build=${BUILD_TOKEN}`
     );
 
-    if (!res.ok) {
-      throw new Error(`GitHub API error: ${res.status}`);
-    }
-
-    const data: Array<Record<string, any>> = await res.json();
     all.push(...mapReleases(data));
 
     if (data.length < perPage) break;
@@ -68,4 +83,23 @@ export async function fetchAllReleases(): Promise<ReleaseSummary[]> {
     const bDate = b.publishedAt ? Date.parse(b.publishedAt) : 0;
     return bDate - aDate;
   });
+}
+
+export async function fetchLatestVersion(
+  owner = OWNER,
+  repo = REPO
+): Promise<string | null> {
+  try {
+    const data = await githubApi<Record<string, any>>(
+      owner,
+      repo,
+      `/releases/latest?build=${BUILD_TOKEN}`
+    );
+
+    return typeof data?.tag_name === 'string' && data.tag_name
+      ? data.tag_name
+      : null;
+  } catch {
+    return null;
+  }
 }
