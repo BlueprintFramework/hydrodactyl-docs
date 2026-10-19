@@ -17,6 +17,10 @@ from the wrong place or scoped to the wrong zone, subdomain creation will fail.
 
 ## Create A Cloudflare Token
 
+<Callout type="info">
+  You can create the API token [here](https://dash.cloudflare.com/profile/api-tokens?permissionGroupKeys=%5B%7B%22key%22%3A%22dns%22%2C%22type%22%3A%22edit%22%7D%5D&accountId=*&zoneId=all&name=Hydrodactyl%20Domain%20Key).
+</Callout>
+
 1. Open **Cloudflare Dashboard -> My Profile -> API Tokens**.
 1. Select **Create Token**.
 1. Start from **Edit zone DNS**, or create a custom token with the same scope.
@@ -100,10 +104,9 @@ Use this if the node uses private addresses internally.
 
 ## Record Behavior
 
-Hydrodactyl creates different records depending on the egg feature and port:
+Hydrodactyl creates different records depending on the egg feature:
 
-- Minecraft on port `25565`: A record only
-- Minecraft on a non-default port: A record plus an SRV record
+- Minecraft: an A record plus a `_minecraft._tcp` SRV record, on any port
 - Other supported services: record sets vary by feature
 
 See [Egg Features](/docs/hydrodactyl/config/egg-features) for the supported

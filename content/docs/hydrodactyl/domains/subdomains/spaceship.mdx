@@ -1,0 +1,82 @@
+---
+title: Spaceship Subdomains
+description: Configure Spaceship as a DNS provider for Hydrodactyl subdomains.
+---
+
+<Callout type="warn">
+Spaceship shows the API **secret** only once, right after the key is created. Copy
+both the key and the secret before closing the page.
+</Callout>
+
+## What You Need
+
+- A domain such as `example.com` registered at Spaceship and using Spaceship DNS
+- A Hydrodactyl panel admin account
+- A node and allocation setup that can publish a public address
+- A supported egg feature such as `subdomain_minecraft`
+
+## Create A Spaceship API Key
+
+1. Open the **API Manager** in your Spaceship account.
+1. Select **New API key** and give it a name, for example `Hydrodactyl`.
+1. Give the key these scopes:
+
+   - `domains:read`
+   - `dnsrecords:read`
+   - `dnsrecords:write`
+
+1. Create the key and copy:
+
+   - The key shown under **Use this key in your external application**
+   - The value shown under **Secret**
+
+## Verify The Key
+
+Before adding the domain to Hydrodactyl, verify the key from any machine that can
+reach the Spaceship API:
+
+```bash
+curl "https://spaceship.dev/api/v1/domains?take=1&skip=0" \
+  --header "X-API-Key: YOUR_API_KEY" \
+  --header "X-API-Secret: YOUR_API_SECRET"
+```
+
+The response should list a domain from your account.
+
+If you receive a `401` error here, Hydrodactyl will fail too.
+
+## Create The Domain In Hydrodactyl
+
+1. Open **Admin -> Settings -> Domains**.
+1. Select **Create Domain**.
+1. Fill in:
+
+   - **Domain Name**: your domain, for example `example.com`
+   - **DNS Provider**: `Spaceship DNS Service`
+   - **API key**: the API key
+   - **Secret**: the API secret
+
+1. Click **Test Connection**.
+1. If the connection succeeds, save the domain.
+1. Mark the domain as **Active**.
+1. Mark it as **Default** if you want Hydrodactyl to generate subdomains for new
+   supported servers automatically.
+
+Then make sure the node and allocations publish a public address. See [Configure The
+Node And Allocations](/docs/hydrodactyl/domains/subdomains/cloudflare#configure-the-node-and-allocations).
+
+## Troubleshooting
+
+### `Authentication failed for DNS provider 'spaceship'`
+
+The key or secret is wrong, or the key was deleted. Spaceship can't show the secret
+again, so create a new key and test it with the `curl` command above.
+
+### `Invalid configuration for DNS provider 'spaceship'`
+
+Either the **API key** or the **Secret** field is empty. Both are required.
+
+### Records Are Not Created
+
+Check that the key has the `dnsrecords:read` and `dnsrecords:write` scopes, and that
+the domain uses Spaceship's name servers.

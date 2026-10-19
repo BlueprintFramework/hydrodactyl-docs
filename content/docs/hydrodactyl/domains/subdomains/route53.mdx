@@ -1,0 +1,108 @@
+---
+title: AWS Route 53 Subdomains
+description: Configure AWS Route 53 as a DNS provider for Hydrodactyl subdomains.
+---
+
+<Callout type="warn">
+Create a dedicated IAM user for Hydrodactyl. Never use your AWS root account's
+access keys.
+</Callout>
+
+## What You Need
+
+- A public hosted zone such as `example.com` in Route 53
+- A Hydrodactyl panel admin account
+- A node and allocation setup that can publish a public address
+- A supported egg feature such as `subdomain_minecraft`
+
+## Create An IAM Access Key
+
+1. Open the **AWS Console -> IAM -> Users** and select **Create user**.
+1. Attach a policy that allows these actions:
+
+   - `route53:ListHostedZones`
+   - `route53:ListResourceRecordSets`
+   - `route53:ChangeResourceRecordSets`
+
+   For example:
+
+   ```json
+   {
+     "Version": "2012-10-17",
+     "Statement": [
+       {
+         "Effect": "Allow",
+         "Action": "route53:ListHostedZones",
+         "Resource": "*"
+       },
+       {
+         "Effect": "Allow",
+         "Action": [
+           "route53:ListResourceRecordSets",
+           "route53:ChangeResourceRecordSets"
+         ],
+         "Resource": "arn:aws:route53:::hostedzone/YOUR_HOSTED_ZONE_ID"
+       }
+     ]
+   }
+   ```
+
+1. Open the user, go to **Security credentials**, and select **Create access key**.
+1. Copy the **Access key ID** and **Secret access key** immediately. The secret is
+   only shown once.
+
+## Get The Hosted Zone ID
+
+1. Open **Route 53 -> Hosted zones**.
+1. Copy the **Hosted zone ID** of your zone, for example `Z0123456789ABCDEFGHIJ`.
+
+## Verify The Access Key
+
+If you have the AWS CLI installed, you can check the key before adding the domain to
+Hydrodactyl:
+
+```bash
+AWS_ACCESS_KEY_ID=YOUR_KEY_ID AWS_SECRET_ACCESS_KEY=YOUR_SECRET \
+  aws route53 list-hosted-zones
+```
+
+The response should list your hosted zone.
+
+## Create The Domain In Hydrodactyl
+
+1. Open **Admin -> Settings -> Domains**.
+1. Select **Create Domain**.
+1. Fill in:
+
+   - **Domain Name**: your zone name, for example `example.com`
+   - **DNS Provider**: `AWS Route53 DNS Service`
+   - **Access key ID**: the IAM access key ID
+   - **Secret access key**: the IAM secret access key
+   - **Hosted zone ID**: the Route 53 hosted zone ID
+   - **Region**: optional, defaults to `us-east-1`. Route 53 is a global service, so
+     this can usually be left empty.
+
+1. Click **Test Connection**.
+1. If the connection succeeds, save the domain.
+1. Mark the domain as **Active**.
+1. Mark it as **Default** if you want Hydrodactyl to generate subdomains for new
+   supported servers automatically.
+
+Then make sure the node and allocations publish a public address. See [Configure The
+Node And Allocations](/docs/hydrodactyl/domains/subdomains/cloudflare#configure-the-node-and-allocations).
+
+## Troubleshooting
+
+### `Failed to connect to DNS provider 'route53'`
+
+The message includes the reason from AWS. The most common ones are:
+
+- The access key ID or secret was copied incorrectly
+- The access key was deactivated or deleted
+- The IAM user is missing `route53:ListHostedZones`
+
+### Records Are Not Created
+
+Check that the IAM policy allows `route53:ChangeResourceRecordSets` and
+`route53:ListResourceRecordSets` on the hosted zone, and that the **Hosted zone ID**
+belongs to the domain you entered.

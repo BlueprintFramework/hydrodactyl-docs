@@ -1,0 +1,84 @@
+---
+title: Hetzner Subdomains
+description: Configure Hetzner DNS as a DNS provider for Hydrodactyl subdomains.
+---
+
+<Callout type="warn">
+Hydrodactyl uses the Hetzner Cloud API (`api.hetzner.cloud`). Create the token in
+the **Hetzner Console** project that holds your DNS zone. Tokens from the old DNS
+Console (`dns.hetzner.com`) will not work.
+</Callout>
+
+## What You Need
+
+- A DNS zone such as `example.com` in a Hetzner Console project
+- A Hydrodactyl panel admin account
+- A node and allocation setup that can publish a public address
+- A supported egg feature such as `subdomain_minecraft`
+
+## Create A Hetzner Token
+
+1. Open the **Hetzner Console** and select the project that holds your zone.
+1. Go to **Security -> API Tokens**.
+1. Select **Generate API Token**.
+1. Set the permission to **Read & Write**.
+1. Create the token and copy it immediately.
+
+<Callout type="info">
+  Hetzner finds the zone by its name, so there is no zone ID to copy. The zone has
+  to be in the same project as the token.
+</Callout>
+
+## Verify The Token
+
+Before adding the domain to Hydrodactyl, verify the token from any machine that can
+reach the Hetzner API:
+
+```bash
+curl "https://api.hetzner.cloud/v1/zones" \
+  --header "Authorization: Bearer YOUR_TOKEN"
+```
+
+The response should list your zone under `"zones"`.
+
+If you receive an authentication error or an empty list here, Hydrodactyl will fail
+too.
+
+## Create The Domain In Hydrodactyl
+
+1. Open **Admin -> Settings -> Domains**.
+1. Select **Create Domain**.
+1. Fill in:
+
+   - **Domain Name**: your zone name, for example `example.com`
+   - **DNS Provider**: `Hetzner DNS Console`
+   - **API token**: the token created above
+
+1. Click **Test Connection**.
+1. If the connection succeeds, save the domain.
+1. Mark the domain as **Active**.
+1. Mark it as **Default** if you want Hydrodactyl to generate subdomains for new
+   supported servers automatically.
+
+Then make sure the node and allocations publish a public address. See [Configure The
+Node And Allocations](/docs/hydrodactyl/domains/subdomains/cloudflare#configure-the-node-and-allocations).
+
+## Troubleshooting
+
+### `Authentication failed for DNS provider 'hetzner'`
+
+The token works but the project has no DNS zones. Check that the token was created
+in the project that holds your zone.
+
+### `Domain zone not found or inaccessible.`
+
+This usually means one of the following:
+
+- The **Domain Name** does not exactly match the zone name in Hetzner
+- The zone is in a different project than the token
+- The token was created with **Read** instead of **Read & Write**
+
+### `Failed to connect to DNS provider 'hetzner'`
+
+The token is wrong or was deleted, or the panel can't reach `api.hetzner.cloud`.
+Create a new token and test it again with the `curl` command above.

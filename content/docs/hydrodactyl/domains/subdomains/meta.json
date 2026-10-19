@@ -1,0 +1,4 @@
+{
+  "title": "Subdomains",
+  "pages": ["cloudflare", "hetzner", "route53", "dnsimple", "bunny", "spaceship", "marque"]
+}

@@ -1,0 +1,81 @@
+---
+title: DNSimple Subdomains
+description: Configure DNSimple as a DNS provider for Hydrodactyl subdomains.
+---
+
+<Callout type="info">
+Use an **account access token** if you can. Hydrodactyl can then find your account
+ID on its own. A **user access token** works too, but you have to enter the account
+ID by hand.
+</Callout>
+
+## What You Need
+
+- A domain such as `example.com` using DNSimple's name servers
+- A Hydrodactyl panel admin account
+- A node and allocation setup that can publish a public address
+- A supported egg feature such as `subdomain_minecraft`
+
+## Create A DNSimple Token
+
+1. Open **DNSimple -> Account -> Access tokens**.
+1. Select **New access token** and give it a name, for example `Hydrodactyl`.
+1. Create the token and copy it immediately.
+
+## Get The Account ID
+
+You only need this when using a user access token.
+
+The account ID is the number in the dashboard URL after `/a/`. For example, in
+`https://dnsimple.com/a/12345/domains`, the account ID is `12345`.
+
+## Verify The Token
+
+Before adding the domain to Hydrodactyl, verify the token from any machine that can
+reach the DNSimple API:
+
+```bash
+curl "https://api.dnsimple.com/v2/whoami" \
+  --header "Authorization: Bearer YOUR_TOKEN"
+```
+
+With an account token, the response includes your account under `"account"`. With a
+user token, `"account"` is `null` and you need to enter the account ID in
+Hydrodactyl.
+
+## Create The Domain In Hydrodactyl
+
+1. Open **Admin -> Settings -> Domains**.
+1. Select **Create Domain**.
+1. Fill in:
+
+   - **Domain Name**: your domain, for example `example.com`
+   - **DNS Provider**: `DNSimple Service`
+   - **API token**: the token created above
+   - **Account ID**: optional, see [Get The Account ID](#get-the-account-id)
+
+1. Click **Test Connection**.
+1. If the connection succeeds, save the domain.
+1. Mark the domain as **Active**.
+1. Mark it as **Default** if you want Hydrodactyl to generate subdomains for new
+   supported servers automatically.
+
+Then make sure the node and allocations publish a public address. See [Configure The
+Node And Allocations](/docs/hydrodactyl/domains/subdomains/cloudflare#configure-the-node-and-allocations).
+
+## Troubleshooting
+
+### `Unable to determine Account ID from DNSimple API.`
+
+You are using a user access token without an account ID. Enter the **Account ID**,
+or create an account access token instead.
+
+### `Failed to connect to DNS provider 'dnsimple'`
+
+The token is wrong or was revoked. Create a new token and test it again with the
+`curl` command above.
+
+### Records Are Not Created
+
+Check that the **Domain Name** exactly matches the domain in DNSimple and that the
+domain belongs to the account the token or account ID points to.
