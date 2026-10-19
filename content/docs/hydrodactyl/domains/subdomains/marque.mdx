@@ -1,0 +1,87 @@
+---
+title: Marque Subdomains
+description: Configure Marque as a DNS provider for Hydrodactyl subdomains.
+---
+
+Marque keeps a domain's DNS records in an AT Protocol account's repository (the
+same kind of account used by Bluesky). Hydrodactyl writes the subdomain records to
+that repository.
+
+<Callout type="info">
+  The domain has to be set up in Marque first. Hydrodactyl looks for the domain's
+  `at.marque.domain` record in the account and fails if it isn't there.
+</Callout>
+
+## What You Need
+
+- A domain such as `example.com` already set up with Marque
+- The AT Protocol account that owns the domain in Marque
+- A Hydrodactyl panel admin account
+- A node and allocation setup that can publish a public address
+- A supported egg feature such as `subdomain_minecraft`
+
+## Choose How To Sign In
+
+Hydrodactyl can sign in to the account in two ways. You only need one.
+
+| Method | How it works |
+| ------ | ------------ |
+| **Connect with AT Protocol** (recommended) | You approve Hydrodactyl on your account's sign-in page. No password is stored in the panel. |
+| **App password** | You paste an app password created for the panel. Use this if connecting doesn't work for your account. |
+
+<Callout type="warn">
+  Never enter your account's main password. Only use an app password created for
+  Hydrodactyl, for example from **Bluesky -> Settings -> Privacy and security -> App
+  passwords**.
+</Callout>
+
+## Create The Domain In Hydrodactyl
+
+1. Open **Admin -> Settings -> Domains**.
+1. Select **Create Domain**.
+1. Fill in:
+
+   - **Domain Name**: your domain, for example `example.com`
+   - **DNS Provider**: `Marque DNS Service`
+
+1. Sign in with one of the two methods:
+
+   **Connect with AT Protocol**
+
+   1. Under **Connect a new account**, enter the account's handle (for example
+      `you.bsky.social`) or DID.
+   1. Select **Connect with AT Protocol** and approve the request.
+   1. When you return to the panel, pick the account under **AT Protocol account**.
+
+   **App password**
+
+   1. Leave **AT Protocol account** empty.
+   1. Fill in **Handle or DID** and **App password**.
+   1. Leave **PDS URL** empty unless your account is on a PDS that can't be found
+      automatically.
+
+1. Click **Test Connection**.
+1. If the connection succeeds, save the domain.
+1. Mark the domain as **Active**.
+1. Mark it as **Default** if you want Hydrodactyl to generate subdomains for new
+   supported servers automatically.
+
+Then make sure the node and allocations publish a public address. See [Configure The
+Node And Allocations](/docs/hydrodactyl/domains/subdomains/cloudflare#configure-the-node-and-allocations).
+
+## Troubleshooting
+
+### `Connect an AT Protocol account or provide a handle/DID and app password for Marque.`
+
+Neither sign-in method is filled in. Pick a connected account, or enter both a
+handle/DID and an app password.
+
+### `The configured Marque AT Protocol connection is missing or no longer authorized.`
+
+The connected account was removed or its access was revoked. Connect the account
+again and pick it under **AT Protocol account**.
+
+### `No at.marque.domain record was found for ... in the connected AT Protocol repository.`
+
+The domain isn't set up in Marque on this account. Check that the **Domain Name**
+matches the domain in Marque and that you signed in with the account that owns it.

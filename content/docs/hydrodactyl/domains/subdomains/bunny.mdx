@@ -1,0 +1,69 @@
+---
+title: Bunny.net Subdomains
+description: Configure Bunny DNS as a DNS provider for Hydrodactyl subdomains.
+---
+
+<Callout type="warn">
+bunny.net only offers an **account-wide API key**. It can change everything on your
+bunny.net account, not just DNS, so keep it private.
+</Callout>
+
+## What You Need
+
+- A DNS zone such as `example.com` in Bunny DNS
+- A Hydrodactyl panel admin account
+- A node and allocation setup that can publish a public address
+- A supported egg feature such as `subdomain_minecraft`
+
+## Get The API Key
+
+1. Open the **bunny.net dashboard**.
+1. Open your **Account settings** and find the **API key** section.
+1. Copy the **API key**.
+
+## Verify The Key And Get The Zone ID
+
+Verify the key from any machine that can reach the bunny.net API:
+
+```bash
+curl "https://api.bunny.net/dnszone" \
+  --header "AccessKey: YOUR_API_KEY"
+```
+
+The response lists every DNS zone on the account. Find your zone by its `"Domain"`
+and copy its numeric `"Id"`. That is the zone ID.
+
+If you receive an authentication error here, Hydrodactyl will fail too.
+
+## Create The Domain In Hydrodactyl
+
+1. Open **Admin -> Settings -> Domains**.
+1. Select **Create Domain**.
+1. Fill in:
+
+   - **Domain Name**: your zone name, for example `example.com`
+   - **DNS Provider**: `Bunny.net DNS Service`
+   - **API key**: the API key copied above
+   - **Zone ID**: the numeric zone ID
+
+1. Click **Test Connection**.
+1. If the connection succeeds, save the domain.
+1. Mark the domain as **Active**.
+1. Mark it as **Default** if you want Hydrodactyl to generate subdomains for new
+   supported servers automatically.
+
+Then make sure the node and allocations publish a public address. See [Configure The
+Node And Allocations](/docs/hydrodactyl/domains/subdomains/cloudflare#configure-the-node-and-allocations).
+
+## Troubleshooting
+
+### `Failed to connect to DNS provider 'bunny'`
+
+The message includes the reason from bunny.net. This usually means the API key was
+copied incorrectly or was reset. Copy it again and test it with the `curl` command
+above.
+
+### `DNS zone not found for domain: ...`
+
+The **Domain Name** does not match any zone on the account. Check the spelling, or
+enter the **Zone ID** of the zone you want to use.

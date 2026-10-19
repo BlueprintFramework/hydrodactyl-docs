@@ -2,7 +2,7 @@
   "title": "Hydrodactyl",
   "description": "Hydrodactyl docs",
   "icon": "hydrodactyl",
-  "pages": ["index", "changelog", "automated", "installation", "migrations", "common-issues", "config", "updating", "subdomains", "local-development", "misc", "..."],
+  "pages": ["index", "changelog", "automated", "installation", "migrations", "common-issues", "config", "updating", "domains", "local-development", "misc", "..."],
   "root": true,
   "defaultOpen": true
 }

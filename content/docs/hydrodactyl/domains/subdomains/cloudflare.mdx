@@ -104,10 +104,9 @@ Use this if the node uses private addresses internally.
 
 ## Record Behavior
 
-Hydrodactyl creates different records depending on the egg feature and port:
+Hydrodactyl creates different records depending on the egg feature:
 
-- Minecraft on port `25565`: A record only
-- Minecraft on a non-default port: A record plus an SRV record
+- Minecraft: an A record plus a `_minecraft._tcp` SRV record, on any port
 - Other supported services: record sets vary by feature
 
 See [Egg Features](/docs/hydrodactyl/config/egg-features) for the supported

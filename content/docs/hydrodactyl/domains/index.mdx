@@ -1,0 +1,31 @@
+---
+title: Domains
+description: Give game servers a domain name instead of an IP address and port.
+---
+
+Hydrodactyl can create DNS records for game servers, so players can join with a
+name such as `play.example.com` instead of an IP address and port.
+
+There are two ways to do this:
+
+- **Subdomains**: an administrator adds a domain in
+  **Admin -> Settings -> Domains** with one of the supported DNS providers. Server
+  owners then pick a subdomain of it, for example `survival.example.com`.
+- **User Domains**: server owners point a domain they own, on their own Cloudflare
+  account, at their Minecraft server.
+
+A server can have one subdomain and one user domain at the same time.
+
+<Callout type="info">
+  For Hydrodactyl-specific issues, please use [Hydrodactyl Discord](https://discord.gg/sK686yHdaK) instead of
+  Pterodactyl or Pelican support channels.
+</Callout>
+
+<Cards>
+  <Card title="Subdomains" href="/docs/hydrodactyl/domains/subdomains">
+    Connect a DNS provider and let servers use subdomains of your domain.
+  </Card>
+  <Card title="User Domains" href="/docs/hydrodactyl/domains/user-domains">
+    Let server owners point their own Cloudflare domain at their Minecraft server.
+  </Card>
+</Cards>
