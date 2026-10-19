@@ -1,41 +1,65 @@
 ---
 title: Egg Features
-description: Hydrodactyl offers a variety of features tailored for hosting game servers efficiently. Below is a detailed overview of the supported features for Hydrodactyl eggs, designed to enhance your server management experience.
+description: Features you can add to Hydrodactyl eggs, including the Minecraft mod and plugin installer, subdomains, and server console helpers.
 ---
 
-#### Hytale Oath Support. Provides and Easy to use link for Setting up and downloading the Hytale Server Binary.
-`hytale_oauth`: Hytale modal that makes it easy to setup Hytale with oath or a code.
+Hydrodactyl eggs can declare **features** — special entries in the egg's `features` array. When the panel sees a feature it recognises, it enables the matching UI, DNS record, or installer for that server.
 
-#### Uses the [McLogs](https://mclo.gs/) Service to provide detailed breakdowns of server crashes in the comfort of Hydrodactyl!
-`mclogs`: Integrated logging system for Minecraft servers, allowing easy access to server logs for debugging and monitoring.
+## Minecraft mod & plugin installer
+
+Hydrodactyl ships a built-in installer for Minecraft mods and plugins. Servers whose egg has a `mod/` or `plugin/` feature get an **Installer** tab, where users can search supported marketplaces and install releases. The panel resolves the download and has the daemon pull the file straight into the server's `mods/` or `plugins/` folder.
+
+| Source   | Content             | Website                                               |
+| -------- | ------------------- | ----------------------------------------------------- |
+| Modrinth | Mods and plugins    | [modrinth.com](https://modrinth.com/)                 |
+| Hangar   | Plugins (PaperMC)   | [hangar.papermc.io](https://hangar.papermc.io/)       |
+| Spigot   | Plugins (SpigotMC)  | [spigotmc.org](https://www.spigotmc.org/resources/)   |
+
+Enable the installer for an egg by adding a loader feature:
+
+- `mod/<loader>` installs into the server's `mods/` folder
+- `plugin/<loader>` installs into the server's `plugins/` folder
+
+The value after the prefix is the loader name. Hydrodactyl normalises common aliases (for example `neo_forge` → `neoforge`) and validates the loader against the marketplace's live loader list, so a typo won't offer content that can't actually run.
+
+### Examples
+
+`mod/fabric` · `mod/forge` · `mod/neoforge` · `mod/quilt`
+
+`plugin/paper` · `plugin/purpur` · `plugin/spigot` · `plugin/sponge` · `plugin/bungeecord` · `plugin/velocity` · `plugin/waterfall`
+
+<Callout type="note">
+  Individual marketplaces can be disabled per panel with the
+  `MARKETPLACE_MODRINTH_ENABLED`, `MARKETPLACE_HANGAR_ENABLED` and
+  `MARKETPLACE_SPIGET_ENABLED` environment variables. See [Environment
+  Variables](/docs/hydrodactyl/config/envs).
+</Callout>
 
 ## Subdomains
-### Hydrodactyl supports custom subdomains for seamless server access:
 
-`subdomain_minecraft`: Create dedicated subdomains for Minecraft servers.  
-`subdomain_factorio`: Assign subdomains for Factorio servers.  
-`subdomain_rust`: Configure subdomains for Rust servers.  
-`subdomain_scpsl`: Configure subomains for Scp: Secret Labs.  
-`subdomain_teamspeak`: Configure subdomains for a teamspeak server.  
+Add one of these features to have Hydrodactyl create a DNS record for the server automatically:
 
-## Minecraft Modding/plugin Support
+- `subdomain_minecraft`
+- `subdomain_factorio`
+- `subdomain_rust`
+- `subdomain_scpsl`
+- `subdomain_teamspeak`
+- `subdomain_vintagestory`
 
-> ⚠️ **Coming soon™**
+See [Cloudflare Subdomains](/docs/hydrodactyl/subdomains/cloudflare) for details on configuring a DNS provider.
 
-### Hydrodactyl provides robust support for Minecraft modding/plugin platforms:
+## Server console features
 
-These are dynamic Features. they are loaded by prefixing them with either `plugin/` or `mod/`.  
-The prefix tells hydrodactyl what folder to put your downloaded mod or plugin into it's also  
-there as an identifier for the frontend system. What matters mor than that though, is  
-what you put after it. If you have an egg for something like [Velocity](https://papermc.io/software/velocity)  
-You can do that with `plugin/velocity`.  
-The system will do it's best to auto match it to a loader found via the modrinth api.
+These features show a modal in the server console when the matching problem is detected:
 
-#### Examples of Minecraft Mod/Plugin Features
+- `eula` — offers to accept the Minecraft EULA, then restarts the server.
+- `java_version` — lets the user switch Java versions when the server requires a newer one.
+- `gsl_token` — prompts for a GSL token when the server reports an expired or missing one.
+- `pid_limit` — offers to raise the process (PID) limit when the server hits thread-creation errors.
+- `steam_disk_space` — offers to fix a SteamCMD server that needs more free disk space.
+- `hytale_oauth` — shows a Hytale device-login link when the server needs to be authenticated.
+- `mclogs` — analyses crashes through [mclo.gs](https://mclo.gs/) and shows a readable breakdown in the panel.
 
-`mod/forge`: Find mods for Forge Servers  
-`mod/fabric`: Find mods for Fabric Servers  
-`plugin/paper`: Find plugins for Paper Servers  
-`plugin/purpur`: Find plugins for Purpur Servers  
-`plugin/spigot`: Find plugins for Spigot Servers  
-`plugin/bungeecord`: Find plugins for Bungeecord proxies  
+## Adding a feature to an egg
+
+Features belong to the egg. To add one, edit the egg in the panel admin (**Admin → Nests →** select the nest **→** select the egg) and add the feature string to its **Features** field — or include it in the `features` array when importing an egg JSON.

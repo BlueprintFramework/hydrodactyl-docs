@@ -41,13 +41,9 @@ This comprehensive guide walks you through setting up Hydrodactyl using Docker, 
    docker compose up -d
    ```
 
-1. Run the command below, and go through its prompts to create an admin user:
+1. Open the panel via your server's IP address or domain in a web browser. With no accounts on the system yet, the panel's builtin initial admin creation suite will guide you through creating the first administrator account.
 
-   ```bash
-   docker compose exec panel php artisan p:user:make
-   ```
-
-1. Check that the panel is accessible using the IP address or domain of your server.
+1. Check that the panel remains accessible using the IP address or domain of your server.
 
 ## Panel Configuration
 
@@ -60,8 +56,9 @@ This comprehensive guide walks you through setting up Hydrodactyl using Docker, 
    - You should make sure the daemon ports are free on your backend server
 
 1. On the new node, go to the:
-   - Configuration tab: Copy the contents to /etc/elytra/config.yml on your backend server
+   - Configuration tab: Copy the contents to /etc/pterodactyl/config.yml on your backend server
    - Allocation tab: Add some allocations to use for your servers. The IP should be 0.0.0.0. If you want to show a different IP in the UI (e.g. a subdomain), add an alias. You can input a range of ports like 25565-26000
+
 
 ## Post-Installation Steps
 

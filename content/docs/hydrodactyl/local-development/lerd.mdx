@@ -5,12 +5,8 @@ description: Setup a local development environment using Lerd
 
 
 <Callout type="warn">
-  The dev env currently is not 100% automated, some manual setup is required for the wings daemon
+  The dev env currently is not 100% automated, some manual setup is required for the wings daemon. See "installing wings"
 </Callout>
-<Callout type="info">
-  These docs are not finished yet, if you find something to fix or improve, make a pr!
-</Callout>
-
 
 
 ## Prerequisites
@@ -19,7 +15,6 @@ description: Setup a local development environment using Lerd
 - [pnpm](https://pnpm.io/)
 
 ## Initial setup
-
    <Callout type="warn">
    Note: Running a development environment on the same host as a production environment is not supported and will result in an error when connecting to port 80.
    </Callout>
@@ -28,7 +23,10 @@ description: Setup a local development environment using Lerd
    `git clone https://github.com/BlueprintFramework/hydrodactyl.git`
 
 1. Cd into the Hydrodactyl directory  
+
    `cd hydrodactyl`
+
+
 
 1. Run the dev env  
    `pnpm dev:setup`
@@ -36,3 +34,53 @@ description: Setup a local development environment using Lerd
 1. Access Hydrodactyl at your new url  
    [`http://hydrodactyl.test`](http://hydrodactyl.test)
 
+   <Callout type="info">
+   Your basic dev setup is now completed and you can login with **username** 'dev' and **password** 'dev'. Follow the guide below to setup wings and install a server. 
+   </Callout>
+
+## Installing wings
+
+1. Follow along [`https://pterodactyl.io/wings/1.0/installing.html`](https://pterodactyl.io/wings/1.0/installing.html) to install wings on your local machine.
+
+1. As we are using https, we have to install local certificates:
+
+   ```bash
+   mkcert hydrodactyl.test
+   ```
+
+1. The certificates have been created in your home directory.
+   Create the certificate directory:
+
+   ```bash
+   mkdir -p /etc/pterodactyl/certs
+   ```
+
+1. Copy the certificates to the certs directory:
+
+   ```bash
+   cp ./hydrodactyl.test.pem \
+    /etc/pterodactyl/certs/fullchain.pem
+
+   cp ./hydrodactyl.test-key.pem \
+    /etc/pterodactyl/certs/privkey.pem
+   ```
+
+1. Run ```nano /etc/pterodactyl/config.yml```, search and enter the correct certificate paths:
+
+   ```yaml
+   ssl:
+     enabled: true
+     cert: /etc/pterodactyl/certs/fullchain.pem
+     key: /etc/pterodactyl/certs/privkey.pem
+   ```
+1. Start wings:
+
+   ```bash
+   wings --debug
+   ```
+
+1. Now you can add nodes and servers and start developing!
+
+   <Callout type="info">
+   The error "Could not communicate with the machine running this server" means that Hydrodactyl has issues communicating with Wings. Check your Wings setup again!
+   </Callout>
